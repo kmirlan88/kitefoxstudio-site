@@ -188,11 +188,14 @@
     /* Contact */
     .hello { margin: 0 0 16px; font-weight: 600; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: -0.01em; line-height: 1.3; color: var(--muted); }
     .email {
-      display: inline-block; font-weight: 700; font-size: clamp(24px, 3.6vw, 54px); letter-spacing: -0.035em; line-height: 1.1;
+      display: inline-block; font-weight: 700; font-size: clamp(24px, 3.3vw, 48px); letter-spacing: -0.035em; line-height: 1.1;
       text-decoration: none; color: var(--accent); background: linear-gradient(currentColor, currentColor) 0 100% / 0 3px no-repeat;
       transition: background-size .45s ease; padding-bottom: 6px; word-break: break-word;
     }
     .email:hover { background-size: 100% 3px; }
+    .contact { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+    .fox-dot--blue { width: clamp(130px, 12vw, 180px); background: var(--color-blue); }
+    .fox-dot--blue img { width: 80%; left: 10%; top: -14%; }
 
     footer { padding-top: clamp(96px, 12vw, 160px); }
     footer .inner { border-top: 1px solid var(--line); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -218,8 +221,9 @@
       .lockup { flex-direction: column; gap: 20px; }
       .tagline { border-left: 0; padding: 0; display: flex; gap: 20px; line-height: 1; }
       .hero-foot { left: 20px; right: 20px; }
-      .about { grid-template-columns: 1fr; }
+      .about, .contact { grid-template-columns: 1fr; }
       .fox-dot { justify-self: end; }
+      .contact .fox-dot { order: -1; margin-top: 24px; }
       .work li { grid-template-columns: 28px 1fr auto; gap: 12px; padding: 24px 0; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -291,9 +295,12 @@
 
     <section id="contact" class="wrap row">
       <p class="label caps">(03) Contact</p>
-      <div>
-        <p class="hello display">Questions, support, or just hello&nbsp;&mdash;</p>
-        <a class="email display" href="mailto:hello@kitefoxstudio.com">hello@kitefoxstudio.com</a>
+      <div class="contact">
+        <div>
+          <p class="hello display">Questions, support, or just hello&nbsp;&mdash;</p>
+          <a class="email display" href="mailto:hello@kitefoxstudio.com">hello@kitefoxstudio.com</a>
+        </div>
+        <div class="fox-dot fox-dot--blue"><img src="/assets/img/fox-portrait.webp" width="451" height="520" alt="A smiling low-poly fox looking up" /></div>
       </div>
     </section>
   </main>
