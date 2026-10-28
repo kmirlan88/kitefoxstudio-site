@@ -13,7 +13,7 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#F4EAD8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#021B38" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -36,20 +36,18 @@
       --color-blue: #5B96BF;
       --color-cream: #F4EAD8;
       --color-white: #FFFFFF;
+      --color-paper: #FBF8F3;
 
       /* Light theme */
-      --background: var(--color-cream);
+      --background: var(--color-paper);
       --surface: var(--color-white);
       --text: var(--color-navy);
       --accent: var(--color-primary);
-      --button-bg: var(--color-secondary);
-      --button-text: var(--color-navy);
-      --muted: rgba(2, 27, 56, .72);
-      --line: rgba(2, 27, 56, .14);
-      --link: var(--color-navy);
-      --art-bg: var(--color-white);
-      --band-bg: var(--color-navy);
-      --band-text: var(--color-cream);
+      --muted: rgba(2, 27, 56, .62);
+      --line: rgba(2, 27, 56, .16);
+      --fox: var(--color-navy);
+      --ring-navy: transparent;
+      --ring-cream: rgba(2, 27, 56, .1);
       color-scheme: light;
     }
     @media (prefers-color-scheme: dark) {
@@ -58,11 +56,11 @@
         --surface: #153454;
         --text: var(--color-cream);
         --accent: var(--color-secondary);
-        --muted: rgba(244, 234, 216, .74);
-        --line: rgba(244, 234, 216, .14);
-        --link: var(--color-secondary);
-        --art-bg: var(--color-cream);
-        --band-bg: #153454;
+        --muted: rgba(244, 234, 216, .66);
+        --line: rgba(244, 234, 216, .18);
+        --fox: var(--color-cream);
+        --ring-navy: rgba(244, 234, 216, .35);
+        --ring-cream: transparent;
         color-scheme: dark;
       }
     }
@@ -71,11 +69,11 @@
       --surface: #153454;
       --text: var(--color-cream);
       --accent: var(--color-secondary);
-      --muted: rgba(244, 234, 216, .74);
-      --line: rgba(244, 234, 216, .14);
-      --link: var(--color-secondary);
-      --art-bg: var(--color-cream);
-      --band-bg: #153454;
+      --muted: rgba(244, 234, 216, .66);
+      --line: rgba(244, 234, 216, .18);
+      --fox: var(--color-cream);
+      --ring-navy: rgba(244, 234, 216, .35);
+      --ring-cream: transparent;
       color-scheme: dark;
     }
 
@@ -88,209 +86,224 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
       font-size: 17px;
       line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--link); text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-    a:hover { color: var(--accent); }
+    a { color: inherit; }
     img { display: block; max-width: 100%; height: auto; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .display { font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif; }
-
-    /* Palette stripe from the brand board */
-    .stripe { display: flex; height: 6px; }
-    .stripe span { flex: 1; }
+    .caps { font-family: "Montserrat", sans-serif; font-weight: 500; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+    .kite { color: var(--color-primary); }
+    .fox { color: var(--fox); }
 
     /* Header */
-    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 20px; padding-bottom: 20px; }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-    .brand .tile { width: 44px; height: 44px; border-radius: 50%; background: var(--art-bg); display: grid; place-items: center; flex: none; }
-    .brand .tile img { width: 34px; height: 34px; }
-    .brand .name { font-weight: 800; font-size: 20px; letter-spacing: -0.01em; }
-    .kite { color: var(--color-primary); }
-    .nav { display: flex; align-items: center; gap: 22px; font-weight: 600; font-size: 15px; }
-    .nav a { text-decoration: none; color: var(--text); }
-    .nav a:hover { color: var(--accent); }
-    .theme-toggle {
-      width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line);
-      background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; padding: 0;
-    }
-    .theme-toggle svg { width: 18px; height: 18px; }
-    .theme-toggle .sun { display: none; }
-    [data-theme="dark"] .theme-toggle .sun { display: block; }
-    [data-theme="dark"] .theme-toggle .moon { display: none; }
+    .top { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+    .mark { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 36px; }
+    .nav a, .theme-toggle { text-decoration: none; color: var(--muted); transition: color .2s; }
+    .nav a:hover, .theme-toggle:hover { color: var(--text); }
+    .theme-toggle { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; }
+    .theme-toggle .to-light { display: none; }
+    [data-theme="dark"] .theme-toggle .to-light { display: inline; }
+    [data-theme="dark"] .theme-toggle .to-dark { display: none; }
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) .theme-toggle .sun { display: block; }
-      :root:not([data-theme="light"]) .theme-toggle .moon { display: none; }
+      :root:not([data-theme="light"]) .theme-toggle .to-light { display: inline; }
+      :root:not([data-theme="light"]) .theme-toggle .to-dark { display: none; }
     }
 
-    /* Hero */
-    .hero { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 48px; padding-top: 48px; padding-bottom: 88px; }
-    .lockup { display: flex; align-items: center; gap: 28px; margin: 0 0 32px; }
-    .wordmark { margin: 0; font-weight: 800; line-height: .95; font-size: clamp(56px, 9vw, 104px); letter-spacing: -0.035em; }
+    /* Hero: the brand board */
+    .hero {
+      min-height: calc(100svh - 84px); display: flex; flex-direction: column; justify-content: center; align-items: center;
+      gap: clamp(48px, 8vh, 88px); padding-top: 24px; padding-bottom: 96px; position: relative;
+    }
+    .dots { display: flex; gap: clamp(12px, 2.2vw, 32px); }
+    .dots span {
+      width: clamp(44px, 9vw, 120px); aspect-ratio: 1; border-radius: 50%;
+      animation: pop .7s cubic-bezier(.2, .9, .3, 1.3) both;
+    }
+    /* outline only the dot that matches the page background */
+    .dots span:nth-child(3), .mini-dots span:nth-child(3) { box-shadow: inset 0 0 0 1.5px var(--ring-navy); }
+    .dots span:nth-child(5), .mini-dots span:nth-child(5) { box-shadow: inset 0 0 0 1.5px var(--ring-cream); }
+    .dots span:nth-child(1) { background: var(--color-primary); }
+    .dots span:nth-child(2) { background: var(--color-secondary); animation-delay: .08s; }
+    .dots span:nth-child(3) { background: var(--color-navy); animation-delay: .16s; }
+    .dots span:nth-child(4) { background: var(--color-blue); animation-delay: .24s; }
+    .dots span:nth-child(5) { background: var(--color-cream); animation-delay: .32s; }
+    @keyframes pop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .lockup { display: flex; align-items: center; gap: clamp(24px, 4vw, 56px); animation: rise .9s .35s ease both; }
+    @keyframes rise { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .wordmark { margin: 0; font-weight: 800; line-height: .9; font-size: clamp(64px, 11vw, 148px); letter-spacing: -0.04em; }
     .wordmark .studio {
-      display: flex; justify-content: space-between; font-weight: 500; letter-spacing: 0;
-      font-size: .28em; margin-top: .3em; padding: 0 .15em;
+      display: flex; justify-content: space-between; font-weight: 500; letter-spacing: 0; color: var(--fox);
+      font-size: .25em; margin-top: .45em; padding: 0 .2em;
     }
-    .tagline {
-      border-left: 2px solid var(--line); padding-left: 24px; margin: 0; list-style: none;
-      font-weight: 500; font-size: 15px; letter-spacing: .22em; line-height: 2; text-transform: uppercase; color: var(--muted);
-    }
-    .lead { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.3; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em; }
-    .sub { color: var(--muted); margin: 0 0 28px; }
-    .button {
-      display: inline-flex; align-items: center; gap: 10px; background: var(--button-bg); color: var(--button-text);
-      font-weight: 700; text-decoration: none; padding: 14px 24px; border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(243, 72, 27, .25); transition: transform .15s ease;
-    }
-    .button:hover { color: var(--button-text); transform: translateY(-2px); }
-    .art {
-      position: relative; aspect-ratio: 1; width: 100%; max-width: 440px; justify-self: end; border-radius: 50%;
-      background: var(--art-bg); box-shadow: 0 0 0 12px rgba(91, 150, 191, .38);
-    }
-    .art img { position: absolute; width: 96%; left: 2%; top: -4%; }
+    .tagline { margin: 0; padding: 4px 0 4px clamp(24px, 4vw, 56px); border-left: 1px solid var(--line); list-style: none; font-size: clamp(13px, 1.4vw, 18px); line-height: 2.2; }
+    .hero-foot { position: absolute; left: 40px; right: 40px; bottom: 32px; display: flex; justify-content: space-between; }
+    .hero-foot a { text-decoration: none; }
 
     /* Sections */
-    section { padding-bottom: 88px; }
-    .eyebrow { font-weight: 700; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
-    h2 { font-weight: 800; font-size: clamp(30px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 28px; }
-    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
-    .card-head { display: flex; align-items: center; gap: 16px; }
-    .card-head img { width: 60px; height: 60px; border-radius: 14px; flex: none; }
-    .card h3 { margin: 0; font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
-    .card p { margin: 0; color: var(--muted); flex: 1; }
-    .card .links { display: flex; gap: 20px; flex-wrap: wrap; font-weight: 600; font-size: 15px; }
-    .badge {
-      display: inline-block; margin-top: 4px; font-size: 12px; font-weight: 700; letter-spacing: .02em;
-      background: var(--color-blue); color: var(--color-navy); border-radius: 999px; padding: 2px 10px;
-    }
+    section { padding-top: clamp(80px, 12vw, 160px); }
+    .row { display: grid; grid-template-columns: 3fr 9fr; gap: 40px; }
+    .label { padding-top: 10px; }
 
-    .band {
-      background: var(--band-bg); color: var(--band-text); border-radius: 28px; padding: 48px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
-    }
-    .band h2 { margin: 0 0 8px; }
-    .band p { margin: 0; color: var(--band-text); opacity: .8; }
-    .band .eyebrow { color: var(--color-secondary); }
+    .statement { margin: 0; font-weight: 600; font-size: clamp(32px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -0.03em; max-width: 13em; }
+    .statement em { font-style: normal; color: var(--accent); }
+    .about { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+    .about p.body { margin: 28px 0 0; max-width: 30em; color: var(--muted); font-size: 18px; }
+    .fox-dot { width: clamp(160px, 18vw, 240px); aspect-ratio: 1; border-radius: 50%; background: var(--color-cream); position: relative; }
+    .fox-dot img { position: absolute; width: 112%; left: -4%; top: -14%; transition: transform .6s ease; }
+    .fox-dot:hover img { transform: translateY(-6px) rotate(-2deg); }
 
-    footer { padding-bottom: 40px; font-size: 14px; color: var(--muted); }
-    footer .inner { border-top: 1px solid var(--line); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .dots { display: flex; gap: 6px; }
-    .dots span { width: 12px; height: 12px; border-radius: 50%; }
-
-    @media (max-width: 820px) {
-      .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 24px; padding-bottom: 64px; }
-      .art { order: -1; max-width: 300px; justify-self: center; }
-      .cards { grid-template-columns: 1fr; }
-      section { padding-bottom: 64px; }
-      .band { padding: 32px 24px; }
+    /* Work index */
+    .work { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--text); }
+    .work li {
+      position: relative; display: grid; grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1.5fr) 150px 32px; align-items: center; gap: 24px;
+      padding: 32px 0; border-bottom: 1px solid var(--line);
     }
-    @media (max-width: 560px) {
-      .wrap { padding-left: 16px; padding-right: 16px; }
-      .nav a { display: none; }
-      .lockup { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .tagline { border-left: 0; padding-left: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; line-height: 1.6; }
-      .card { padding: 22px; }
+    .work .num { font-family: "Montserrat", sans-serif; font-weight: 500; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .work .name { display: flex; align-items: center; gap: 0; font-weight: 700; font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -0.03em; line-height: 1.1; }
+    .work .name a { text-decoration: none; }
+    .work .name a::after { content: ""; position: absolute; inset: 0; }
+    .work .icon {
+      width: 0; height: 44px; border-radius: 11px; overflow: hidden; flex: none; opacity: 0; margin-right: 0;
+      transition: width .35s ease, opacity .35s ease, margin-right .35s ease;
+    }
+    .work .icon img { width: 44px; height: 44px; }
+    .work li:hover .icon, .work li:focus-within .icon { width: 44px; opacity: 1; margin-right: 16px; }
+    .work .desc { margin: 0; color: var(--muted); }
+    .work .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; white-space: nowrap; }
+    .work .meta a { position: relative; z-index: 1; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent); }
+    .work .meta a:hover { color: var(--accent); }
+    .status { display: inline-flex; align-items: center; gap: 8px; }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--color-blue); }
+    .work .arrow { font-size: 22px; color: var(--muted); transition: transform .3s ease, color .3s ease; justify-self: end; }
+    .work li:hover .arrow { transform: translateX(6px); color: var(--accent); }
+    .work li::before {
+      content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--accent); transition: width .45s ease;
+    }
+    .work li:hover::before { width: 100%; }
+
+    /* Contact */
+    .hello { margin: 0 0 16px; font-weight: 600; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: -0.01em; line-height: 1.3; color: var(--muted); }
+    .email {
+      display: inline-block; font-weight: 700; font-size: clamp(24px, 3.6vw, 54px); letter-spacing: -0.035em; line-height: 1.1;
+      text-decoration: none; color: var(--accent); background: linear-gradient(currentColor, currentColor) 0 100% / 0 3px no-repeat;
+      transition: background-size .45s ease; padding-bottom: 6px; word-break: break-word;
+    }
+    .email:hover { background-size: 100% 3px; }
+
+    footer { padding-top: clamp(96px, 12vw, 160px); }
+    footer .inner { border-top: 1px solid var(--line); padding: 28px 0 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .mini-dots { display: flex; gap: 6px; }
+    .mini-dots span { width: 10px; height: 10px; border-radius: 50%; }
+
+    @media (max-width: 900px) {
+      .row { grid-template-columns: 1fr; gap: 20px; }
+      .label { padding-top: 0; }
+      .work li { grid-template-columns: 40px 1fr auto; row-gap: 8px; }
+      .work .desc { grid-column: 2 / -1; grid-row: 2; }
+      .work .meta { grid-column: 2 / -1; grid-row: 3; align-items: flex-start; flex-direction: row; gap: 20px; }
+      .work .arrow { grid-column: 3; grid-row: 1; }
+      .work .icon { width: 36px; height: 36px; opacity: 1; margin-right: 14px; border-radius: 9px; }
+      .work .icon img { width: 36px; height: 36px; }
+      .work li:hover .icon, .work li:focus-within .icon { width: 36px; margin-right: 14px; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding-left: 20px; padding-right: 20px; }
+      .nav { gap: 22px; }
+      .nav .hide-sm { display: none; }
+      .hero { gap: 56px; }
+      .lockup { flex-direction: column; gap: 20px; }
+      .tagline { border-left: 0; padding: 0; display: flex; gap: 20px; line-height: 1; }
+      .hero-foot { left: 20px; right: 20px; }
+      .about { grid-template-columns: 1fr; }
+      .fox-dot { justify-self: end; }
+      .work li { grid-template-columns: 28px 1fr auto; gap: 12px; padding: 24px 0; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .button { transition: none; }
+      *, *::before { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="stripe" aria-hidden="true">
-    <span style="background:#F3481B"></span><span style="background:#FB6D19"></span><span style="background:#021B38"></span><span style="background:#5B96BF"></span><span style="background:#F4EAD8"></span>
-  </div>
-
   <header class="wrap top">
-    <a class="brand display" href="/">
-      <span class="tile"><img src="/assets/img/fox-head.webp" alt="" width="34" height="34" /></span>
-      <span class="name"><span class="kite">Kite</span>fox Studio</span>
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="#apps">Apps</a>
+    <a class="mark" href="/" aria-label="Kitefox Studio home"><span class="kite">Kite</span><span class="fox">fox</span></a>
+    <nav class="nav caps" aria-label="Main">
+      <a class="hide-sm" href="#studio">Studio</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
-      <button class="theme-toggle" type="button" aria-label="Switch light or dark theme">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" /></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
-      </button>
+      <button class="theme-toggle" type="button" aria-label="Switch light or dark theme"><span class="to-dark">Dark</span><span class="to-light">Light</span></button>
     </nav>
   </header>
 
   <main>
     <div class="wrap hero">
-      <div>
-        <div class="lockup display">
-          <h1 class="wordmark">
-            <span class="sr-only">Kitefox Studio</span>
-            <span aria-hidden="true"><span class="kite">Kite</span>fox<span class="studio"><span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span></span></span>
-          </h1>
-          <ul class="tagline">
-            <li>Creative</li>
-            <li>Apps</li>
-          </ul>
-        </div>
-        <p class="lead display">Small, useful things, made with care.</p>
-        <p class="sub">Kitefox Studio is an independent studio in Texas.</p>
-        <a class="button" href="#apps">See our apps <span aria-hidden="true">&rarr;</span></a>
+      <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="lockup display">
+        <h1 class="wordmark">
+          <span class="sr-only">Kitefox Studio</span>
+          <span aria-hidden="true"><span class="kite">Kite</span><span class="fox">fox</span><span class="studio"><span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span></span></span>
+        </h1>
+        <ul class="tagline caps">
+          <li>Creative</li>
+          <li>Apps</li>
+        </ul>
       </div>
-      <div class="art">
-        <img src="/assets/img/fox-kite.webp" width="786" height="762" alt="A low-poly fox flying an orange and navy kite" />
+      <div class="hero-foot caps">
+        <span>Austin, Texas</span>
+        <a href="#studio">Scroll &darr;</a>
       </div>
     </div>
 
-    <section id="apps" class="wrap">
-      <p class="eyebrow display">What we make</p>
-      <h2 class="display">Apps</h2>
-      <div class="cards">
-        <article class="card">
-          <div class="card-head">
-            <img src="/assets/img/app-grocer.webp" alt="" width="60" height="60" />
-            <h3 class="display">Grocer</h3>
-          </div>
-          <p>Plan meals in ChatGPT, then shop from one organized grocery list you can share. Free on iPhone.</p>
-          <div class="links">
-            <a href="https://usegrocer.com">usegrocer.com</a>
-            <a href="https://apps.apple.com/us/app/grocer-shopping-list/id6760124927">App Store</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-head">
-            <img src="/assets/img/app-picklejoin.webp" alt="" width="60" height="60" />
-            <div>
-              <h3 class="display">PickleJoin</h3>
-              <span class="badge">Coming soon</span>
-            </div>
-          </div>
-          <p>Find pickleball games, courts, and players near you, and set up games with friends.</p>
-          <div class="links">
-            <a href="https://picklejoin.app">picklejoin.app</a>
-          </div>
-        </article>
+    <section id="studio" class="wrap row">
+      <p class="label caps">(01) Studio</p>
+      <div class="about">
+        <div>
+          <p class="statement display">Small, useful things, <em>made with care.</em></p>
+          <p class="body">Kitefox Studio is an independent studio in Texas. We design and build apps for everyday life.</p>
+        </div>
+        <div class="fox-dot"><img src="/assets/img/fox-kite.webp" width="786" height="762" alt="A low-poly fox flying an orange and navy kite" /></div>
       </div>
     </section>
 
-    <section id="contact" class="wrap">
-      <div class="band">
-        <div>
-          <p class="eyebrow display">Contact</p>
-          <h2 class="display">Say hello</h2>
-          <p>Questions, support, or anything else.</p>
-        </div>
-        <a class="button" href="mailto:hello@kitefoxstudio.com">hello@kitefoxstudio.com</a>
+    <section id="work" class="wrap row">
+      <p class="label caps">(02) Work</p>
+      <ol class="work">
+        <li>
+          <span class="num">01</span>
+          <h2 class="name display"><span class="icon"><img src="/assets/img/app-grocer.webp" alt="" width="44" height="44" /></span><a href="https://usegrocer.com">Grocer</a></h2>
+          <p class="desc">Plan meals in ChatGPT, then shop from one organized grocery list you can share.</p>
+          <div class="meta caps"><span>iPhone &middot; Free</span><a href="https://apps.apple.com/us/app/grocer-shopping-list/id6760124927">App Store</a></div>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <h2 class="name display"><span class="icon"><img src="/assets/img/app-picklejoin.webp" alt="" width="44" height="44" /></span><a href="https://picklejoin.app">PickleJoin</a></h2>
+          <p class="desc">Find pickleball games, courts, and players near you, and set up games with friends.</p>
+          <div class="meta caps"><span class="status">Coming soon</span></div>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </li>
+      </ol>
+    </section>
+
+    <section id="contact" class="wrap row">
+      <p class="label caps">(03) Contact</p>
+      <div>
+        <p class="hello display">Questions, support, or just hello&nbsp;&mdash;</p>
+        <a class="email display" href="mailto:hello@kitefoxstudio.com">hello@kitefoxstudio.com</a>
       </div>
     </section>
   </main>
 
   <footer class="wrap">
-    <div class="inner">
-      <span>&copy; 2026 Kitefox Studio &middot; Austin, Texas</span>
-      <span class="dots" aria-hidden="true">
-        <span style="background:#F3481B"></span><span style="background:#FB6D19"></span><span style="background:#021B38;box-shadow:0 0 0 1px var(--line)"></span><span style="background:#5B96BF"></span><span style="background:#F4EAD8;box-shadow:0 0 0 1px var(--line)"></span>
+    <div class="inner caps">
+      <span>&copy; 2026 Kitefox Studio</span>
+      <span>Austin, Texas</span>
+      <span class="mini-dots" aria-hidden="true">
+        <span style="background:#F3481B"></span><span style="background:#FB6D19"></span><span style="background:#021B38"></span><span style="background:#5B96BF"></span><span style="background:#F4EAD8"></span>
       </span>
     </div>
   </footer>
